@@ -8,6 +8,7 @@ class BooksController < ApplicationController
   def set_search
     if params[:query].nil? or params[:query] == ""
       @search = Book.ransack(params[:q])
+      @search.sorts = 'created_at desc'
       @results = @search.result.includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
     else
       params[:combinator] = 'or'
@@ -17,7 +18,9 @@ class BooksController < ApplicationController
         params[:groupings][index] = {title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont: word}
       end
       @search = Book.joins(:authors, :courses).ransack(params)
-      unless (params[:q].nil?)
+      if (params[:q].nil?)
+        @search.sorts = 'created_at desc'
+      else
         @search.sorts = params[:q]['s']
       end
       @results = @search.result(:distinct=>true).includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)

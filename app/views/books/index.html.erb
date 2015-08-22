@@ -1,8 +1,10 @@
 <div class="container">
 	<%= search_form_for @search, enforce_utf8: false, :html => {:class => "input-group input-group-lg"} do |f| %>
-		<%= f.text_field :title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont_any, name: :query, :class => "form-control", placeholder: "ex. Catastrophic Earth EOSC 114", autocomplete: 'off' %>
+		<%= f.text_field :title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont_any, name: :query, :class => "form-control invisible_input search-bar", placeholder: "ex. Catastrophic Earth EOSC 114", autocomplete: 'off'%>
 		<span class="input-group-btn">
-			<%= f.submit "Search", name: nil, :class => 'btn btn-default pull-right' %>
+			<button type="submit" class="btn btn-default search-bar">
+			  <i class="fa fa-search"></i>
+			</button>
 		</span>
 	<%end%>
 	<%= content_tag :p, display_query_sql(@results) if false %>

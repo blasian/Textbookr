@@ -9,6 +9,18 @@ textarea.input_description {
 	font-size: 30px;
 }
 
+.btn.search-bar {
+	margin-top: 10px;
+	margin-left: 10px;
+	background-color: #f2f2f2;
+	border: none;
+}
+
+.invisible_input.search-bar {
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
 .form-inline .form-control {
 	width: auto;
 }
