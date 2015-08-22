@@ -11,6 +11,7 @@
 
 - Add persmission so that only OP can edit their
 - Fix Safari UI bugs for search view
+- Remove courses index and authors index
 - ~~Flatten search bar ie no highlights/shadows~~
 - ~~Email not sending for 'forgot password'~~
 - Implement 'email when book is found' feature
