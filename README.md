@@ -13,3 +13,4 @@
 - ~~Flatten search bar ie no highlights/shadows~~
 - ~~Email not sending for 'forgot password'~~
 - Implement 'email when book is found' feature
+- Implement account activation emails
