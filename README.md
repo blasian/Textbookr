@@ -9,6 +9,7 @@
 
 ###TODO
 
+- Add persmission so that only OP can edit their
 - Fix Safari UI bugs for search view
 - ~~Flatten search bar ie no highlights/shadows~~
 - ~~Email not sending for 'forgot password'~~
