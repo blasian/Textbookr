@@ -17,3 +17,4 @@
 - ~~Email not sending for 'forgot password'~~
 - Implement 'email when book is found' feature
 - Implement account activation emails
+- Implement changing password functionality
