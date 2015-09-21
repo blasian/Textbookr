@@ -6,7 +6,8 @@ class BooksController < ApplicationController
   PAGESIZE = 15
 
   def set_search
-    if params[:query].nil? or params[:query] == ""
+    @query = params[:query]
+    if @query.nil? or @query == ""
       @search = Book.ransack(params[:q])
       @search.sorts = 'created_at desc'
       @results = @search.result.includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
@@ -46,8 +47,12 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @author = @book.authors.build
-    @course = @book.courses.build
+    if @book.user_account == current_user_account
+      @author = @book.authors.build
+      @course = @book.courses.build
+    else
+      not_found 
+    end
   end
 
   # book /books
@@ -58,7 +63,9 @@ class BooksController < ApplicationController
       if @book.save
         flash[:success] = "Successfully created book."
         redirect_to @book and return
-      else 
+      else
+        # @author = @book.authors.build
+        # @course = @book.courses.build
         format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end

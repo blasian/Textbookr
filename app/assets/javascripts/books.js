@@ -3,7 +3,7 @@
 
 $(document).on('click', '.result', function(e) {
 	// navigate to books/show/:id when clicking table row
-	window.location.href = ($(this).find('a').attr('href'));
+	window.location.href = ($(this).find('a').attr('data-link'));
 }).on('click', '.contact-info', function(e) {
 	// Hidden contact info
 	e.preventDefault();
@@ -95,8 +95,6 @@ $(document).on('ready page:load', function () {
 	for (var i = 0; i<elms.length; i++) {
 		var elm = elms[i];
 		setObservers(elm);
-		elm.focus();
-		elm.select();
 		resize(elm);
 	}
 });

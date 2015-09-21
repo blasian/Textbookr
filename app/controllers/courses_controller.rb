@@ -1,25 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
-
-  # GET /courses
-  # GET /courses.json
-  def index
-    @courses = Course.all
-  end
-
-  # GET /courses/1
-  # GET /courses/1.json
-  def show
-  end
-
-  # GET /courses/new
-  def new
-    @course = Course.new
-  end
-
-  # GET /courses/1/edit
-  def edit
-  end
+  before_action :set_course, only: [:update, :destroy]
 
   # POST /courses
   # POST /courses.json

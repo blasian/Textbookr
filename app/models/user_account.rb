@@ -1,11 +1,6 @@
 class UserAccount < ActiveRecord::Base
 	has_many :books, dependent: :destroy
-
-  # after_destroy do
-  #   :books.each do |book| 
-  #     Book.find(book.id).destroy
-  #   end
-  # end
+  has_many :user_queries
 
 	before_save { self.email = email.downcase }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

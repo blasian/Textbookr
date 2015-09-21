@@ -22,7 +22,7 @@ $(document).on('mouseover', '#posted_books td', function(e) {
 }).on('click', 'td', function(e) {
 	var link;
 	if (($(this).hasClass('book_cell')) || ($(this).hasClass('date_cell')))
-		window.location.href = $(this).closest('tr').find('.book_cell a').attr('href');
+		window.location.href = $(this).closest('tr').find('.book_cell a').attr('data-link');
 	else if ($(this).hasClass('destroy_cell'))
 		$(this).find('a').click();
 	else if ($(this).hasClass('edit_cell') || $(this).hasClass('active_cell'))

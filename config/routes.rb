@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
 
-  get 'search' => 'searches#index'
+  get 'search' => 'books#index'
   get 'about' => 'static_pages#about'
 
   get 'user_accounts/index'
   get 'user_accounts/new'
   get 'user_accounts/edit'
   get 'user_accounts/show'
+  get 'add_query' => 'user_accounts#add_query'
 
   get 'admin' => 'user_accounts#admin_view'
 

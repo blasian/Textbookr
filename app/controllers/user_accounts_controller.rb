@@ -13,17 +13,25 @@ class UserAccountsController < ApplicationController
   def show
     @current_user_books = current_user_account.books
     @search = @current_user_books.ransack(params[:q])
-    @results = @search.result(:distinct => true).order('created_at DESC')
+    @search.sorts = 'created_at desc'
+    @results = @search.result(:distinct => true)
   end
 
   # GET /user_accounts/new
   def new
     @user_account = UserAccount.new
-
   end
 
   # GET /user_accounts/1/edit
   def edit
+  end
+
+  def add_query
+    @query = current_user_account.user_queries.build
+    @query.query_str = params[:query]
+    @query.save
+    flash[:success] = "You will be emailed when a post matches query: #{@query.query_str}"
+    redirect_to search_path
   end
 
   def admin_view
@@ -145,6 +153,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_account_params
-      params.require(:user_account).permit(:email, :password, :password_confirmation, :isAdmin?)
+      params.require(:user_account).permit(:email, :password, :password_confirmation, :email_confirmation, :isAdmin?)
     end
   end

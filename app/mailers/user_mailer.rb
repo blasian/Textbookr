@@ -10,4 +10,12 @@ class UserMailer < ApplicationMailer
 
     mail to: user.email, subject: "Password Reset"
   end
+
+  def notify_user(user, query, book)
+  	@user = user
+  	@query = query
+  	@book = book
+
+  	mail(to: @user.email, subject: 'Your book has been posted')
+  end
 end

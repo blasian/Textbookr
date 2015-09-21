@@ -1,6 +1,11 @@
 require 'faker'
 
-FactoryGirl.define do
+FactoryGirl.define do  factory :query do
+    query_id ""
+user_id ""
+query_str "MyString"
+  end
+
 
   factory :user_account, aliases: [:user] do
     email { Faker::Internet.email }

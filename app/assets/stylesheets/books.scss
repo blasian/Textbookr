@@ -93,7 +93,6 @@ div.field_with_errors {
 	:-ms-input-placeholder { /* Internet Explorer 10+ */
 	   color:    rgba(169,68,66,.8);
 	}
-
 	width: 100%;
 }
 
@@ -102,6 +101,10 @@ div.field_with_errors {
 .date {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+#book_title, #book_post_attributes_price {
+	width: 100%;
 }
 
 .title {

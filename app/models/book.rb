@@ -5,37 +5,38 @@ class Book < ActiveRecord::Base
 	has_many :courses, :dependent => :destroy
 
 	accepts_nested_attributes_for :post
-	accepts_nested_attributes_for :authors, :allow_destroy => true, :reject_if => :reject_author 
-	accepts_nested_attributes_for :courses, :allow_destroy => true, :reject_if => :reject_course
-
+	accepts_nested_attributes_for :authors, :allow_destroy => true, :reject_if => :reject_author? 
+	accepts_nested_attributes_for :courses, :allow_destroy => true, :reject_if => :reject_course?
 	validates :user_account, :title, presence: true
-	validate :has_author?, :has_course?, :has_too_many_course?, :has_too_many_author?
+	validate :has_author?, :has_too_many_course?, :has_too_many_author?
 
-	def reject_author(attributes)
+	after_save :alert_observers
+
+	def reject_author? a
 		return false if authors.length == 0
-		exists = attributes['id'].present?
-		empty = attributes[:au_fname].blank? and attributes[:au_lname].blank?
-		attributes.merge!({:_destroy => 1}) if exists and empty
-		return (!exists and empty)
+		return (a[:au_lname].blank? and a[:au_fname].blank?)
 	end
 
-	def reject_course(attributes)
+	def reject_course? c
 		return false if courses.length == 0
-		exists = attributes['id'].present?
-		empty = attributes[:department].blank? and attributes[:course_number].blank?
-		attributes.merge!({:_destroy => 1}) if exists and empty
-		return (!exists and empty)
+		return (c[:department].blank? and c[:course_number].blank?)
 	end
 
 	def has_author?
-		if authors.length == 0
+		if authors.length == 0 or all_will_be_destroyed authors
 			errors.add(:book, "must have at least one author")
+			authors.each do |a|
+				a.reload if a.marked_for_destruction?
+			end
 		end
 	end
 
 	def has_course?
-		if courses.length == 0
+		if courses.length == 0 or all_will_be_destroyed courses
 			errors.add(:book, "must have at least one course")
+			courses.each do |c|
+				c.reload if c.marked_for_destruction?
+			end
 		end
 	end
 
@@ -48,6 +49,19 @@ class Book < ActiveRecord::Base
 	def has_too_many_author?
 		if authors.length > 3
 			errors.add(:courses, "cannot have more than 3 authors")
+		end
+	end
+
+	def all_will_be_destroyed arr
+		arr.each do |elm|
+			return false unless elm.marked_for_destruction?
+		end
+		return true
+	end
+
+	def alert_observers
+		UserQuery.find_each do |query|
+			query.check_for_match self
 		end
 	end
 end

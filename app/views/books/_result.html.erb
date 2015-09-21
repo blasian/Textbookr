@@ -1,8 +1,8 @@
 <tr class="result">
-	<% authors = result.authors.collect{ |author| author.au_fname + " " + author.au_lname } %>
+	<% authors = Book.find(result.id).authors.collect{ |author| author.au_fname + " " + author.au_lname } %>
 
 	<td>
-		<a href="<%= book_path(result) %>" class="title"> <%= result.send(:title) %> </a>
+		<a class="title" data-link="<%= book_path(result) %>"> <%= result.send(:title) %> </a>
 		<p class="authors"> <%= authors.sort_by!{ |b| b.downcase }*", " %> </p>
 	</td>
 	<td class="price">

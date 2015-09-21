@@ -1,28 +1,6 @@
 
 class AuthorsController < ApplicationController
-before_action :set_author, only: [:show, :edit, :update, :destroy]
-
-  # GET /authors
-  # GET /authors.json
-  def index
-    @authors = Author.all
-  end
-
-  # GET /authors/1
-  # GET /authors/1.json
-  def show
-    # @author = set_author
-  end
-
-  # GET /authors/new
-  def new
-    @author = Author.new
-  end
-
-  # GET /authors/1/edit
-  def edit
-  end
-
+before_action :set_author, only: [:update, :destroy]
   # author /authors
   # author /authors.json
   def create

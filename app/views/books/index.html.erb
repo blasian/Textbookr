@@ -1,6 +1,6 @@
 <div class="container">
 	<%= search_form_for @search, enforce_utf8: false, :html => {:class => "input-group input-group-lg"} do |f| %>
-		<%= f.text_field :title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont_any, name: :query, :class => "form-control invisible_input search-bar", placeholder: "ex. Catastrophic Earth EOSC 114", autocomplete: 'off'%>
+		<%= f.text_field :title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont_any, :value => @query, name: :query, :class => "form-control invisible_input search-bar", placeholder: "ex. Catastrophic Earth EOSC 114", autocomplete: 'off'%>
 		<span class="input-group-btn">
 			<button type="submit" class="btn btn-default search-bar">
 			  <i class="fa fa-search"></i>
@@ -26,7 +26,7 @@
 		<div class="awk-container">
 			<p class="awkward-message"> Well, this is awkward... </p>
 			<p class="no-match awkward-message"> No posts matched your search </p>
-			<a href=""> <p class="get-alert"> Click here to receive an email when a match is posted </p> </a>
+			<%= link_to "Click here to receive an email when a match is posted", add_query_path(query: @query ), class: "get-alert" %>
 		</div>
 	<% end %>
 	<%= paginate @results %>
