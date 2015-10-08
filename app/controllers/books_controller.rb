@@ -16,7 +16,7 @@ class BooksController < ApplicationController
       params[:groupings] = []
       custom_words = params[:query]
       custom_words.split(' ').each_with_index do |word, index|
-        params[:groupings][index] = {title_or_authors_au_fname_or_authors_au_lname_or_courses_department_cont: word}
+        params[:groupings][index] = {title_cont: word}
       end
       @search = Book.joins(:authors, :courses).ransack(params)
       if (params[:q].nil?)

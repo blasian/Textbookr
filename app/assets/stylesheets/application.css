@@ -24,6 +24,11 @@ body {
 	font-family: "Georgia";
 }
 
+#main {
+	position: relative;
+	top: 50px;
+}
+
 
 /* Table Rows */
 

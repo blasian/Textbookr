@@ -29,7 +29,10 @@ Rails.application.routes.draw do
   resources :user_accounts
   resources :posts
   resources :searches
-  resources :books 
+  resources :books do
+    collection { post :search, to: 'books#index' }
+  end
+
   resources :password_resets
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,7 +3,39 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "bootstrap/bootstrap";
-/* ================================= New =================================*/
+
+/* ================================= Content ================================= */
+
+#content-container {
+	position: relative;
+	float: right;
+	top: 50px;
+	width: 80%;
+}
+
+/* ================================= Sidebar ================================= */
+
+#sidebar {
+	float: left;
+    position: fixed;
+    left: 10px;
+    top: 50px;
+    height: 100%;
+    width: 15%;
+}
+
+#search-bar {
+	position: fixed;
+	top: 50px;
+	width: 80%;
+	left: 20%;
+	background-color: white;
+	z-index: 1000;
+	padding-bottom: 10px;
+	padding-right: 30px;
+}
+
+/* ================================= New ================================= */
 
 textarea.input_description {
 	font-size: 30px;
@@ -14,11 +46,7 @@ textarea.input_description {
 	margin-left: 10px;
 	background-color: #f2f2f2;
 	border: none;
-}
-
-.invisible_input.search-bar {
-	border-top-right-radius: 0px !important;
-	border-bottom-right-radius: 0px !important;
+	width: 100%;
 }
 
 .form-inline .form-control {
@@ -117,6 +145,7 @@ div.field_with_errors {
 
 .awk-container {
 	padding: 20px;
+	width: 100%;
 }
 
 .awkward-message {
