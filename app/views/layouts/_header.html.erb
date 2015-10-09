@@ -11,7 +11,7 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="navbar-brand" style="padding: 0px"> <%= link_to "TextBookr", root_path %></li>
-        <li ><%= link_to "Search" , books_path%></li>             
+        <li ><%= link_to "Search", query_searches_path%></li>             
 
         <li>
           <%= link_to_unless logged_in? == false, "Post", new_book_path do

@@ -9,7 +9,6 @@ class Book < ActiveRecord::Base
 	accepts_nested_attributes_for :courses, :allow_destroy => true, :reject_if => :reject_course?
 	validates :user_account, :title, presence: true
 	validate :has_author?, :has_too_many_course?, :has_too_many_author?
-
 	after_save :alert_observers
 
 	def reject_author? a
@@ -60,7 +59,7 @@ class Book < ActiveRecord::Base
 	end
 
 	def alert_observers
-		UserQuery.find_each do |query|
+		Search.where(alert: true).find_each do |query|
 			query.check_for_match self
 		end
 	end

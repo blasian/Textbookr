@@ -1,5 +1,5 @@
 <div class="container">
-	<%= search_form_for @search, url: search_books_path, method: :post, :html => {:class => "input-group input-group-lg"} do |f| %>
+	<%= search_form_for @search, url: query_searches_path, method: :post, :html => {:class => "input-group input-group-lg"} do |f| %>
 		<%= render 'sidebar', :post => f %>
 		<%= render 'search_bar', :post => f %>
 	<% end %>
@@ -10,8 +10,8 @@
 		<div id="results-container">
 			<table id="results" class='table table-hover'>
 				<thead>
-					<%= content_tag(:th, sort_link(@search, :title, {}), class: 'col-sm-8') %>
-					<%= content_tag(:th, sort_link(@search, :post_price, {}), class: 'col-sm-2') %>
+					<%= content_tag(:th, sort_link(@search, :title), class: 'col-sm-8') %>
+					<%= content_tag(:th, sort_link(@search, :post_price), class: 'col-sm-2') %>
 					<%= content_tag(:th, sort_link(@search, :created_at, "Posted"), class: 'col-sm-2') %>
 				</thead>
 
@@ -24,8 +24,9 @@
 		<div class="awk-container">
 			<p class="awkward-message"> Well, this is awkward... </p>
 			<p class="no-match awkward-message"> No posts matched your search </p>
-			<%= link_to "Click here to receive an email when a match is posted", add_query_path(query: @query ), class: "get-alert" %>
+			<%= link_to "Click here to receive an email when a match is posted", search_path(@query, :search => { :alert => 1 }), :method => :put, class: "get-alert" %>
 		</div>
 	<% end %>
+
 	<%= paginate @results %>
 </div>

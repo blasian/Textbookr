@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
 
-  get 'search' => 'books#index'
   get 'about' => 'static_pages#about'
 
   get 'user_accounts/index'
@@ -28,9 +27,11 @@ Rails.application.routes.draw do
   resources :authors
   resources :user_accounts
   resources :posts
-  resources :searches
-  resources :books do
-    collection { post :search, to: 'books#index' }
+  resources :books
+  resources :searches do
+    collection do
+      match 'query' => 'searches#search', via: [:post, :get], as: :query
+    end
   end
 
   resources :password_resets

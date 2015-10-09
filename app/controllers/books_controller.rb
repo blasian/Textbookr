@@ -1,41 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :set_search
   respond_to :html, :js
-
-  PAGESIZE = 15
-
-  def set_search
-    @query = params[:query]
-    if @query.nil? or @query == ""
-      @search = Book.ransack(params[:q])
-      @search.sorts = 'created_at desc'
-      @results = @search.result.includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
-    else
-      params[:combinator] = 'or'
-      params[:groupings] = []
-      custom_words = params[:query]
-      custom_words.split(' ').each_with_index do |word, index|
-        params[:groupings][index] = {title_cont: word}
-      end
-      @search = Book.joins(:authors, :courses).ransack(params)
-      if (params[:q].nil?)
-        @search.sorts = 'created_at desc'
-      else
-        @search.sorts = params[:q]['s']
-      end
-      @results = @search.result(:distinct=>true).includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
-    end
-  end
-
-  def index
-  end
-
-
-  # GET /books/1
-  # GET /books/1.json
-  def show
-  end
 
   # GET /books/new
   def new
@@ -64,8 +29,6 @@ class BooksController < ApplicationController
         flash[:success] = "Successfully created book."
         redirect_to @book and return
       else
-        # @author = @book.authors.build
-        # @course = @book.courses.build
         format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end

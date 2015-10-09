@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920021024) do
+ActiveRecord::Schema.define(version: 20151009000410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(version: 20150920021024) do
     t.integer  "book_id",     null: false
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.string   "title"
+    t.float    "price_min"
+    t.float    "price_max"
+    t.string   "author"
+    t.string   "course"
+    t.integer  "user_account_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "alert"
+    t.text     "groupings"
+    t.string   "combinator"
+  end
+
   create_table "user_accounts", force: :cascade do |t|
     t.string   "email",                                  null: false
     t.boolean  "isAdmin?",               default: false
@@ -61,16 +75,9 @@ ActiveRecord::Schema.define(version: 20150920021024) do
     t.datetime "password_reset_sent_at"
   end
 
-  create_table "user_queries", force: :cascade do |t|
-    t.integer  "user_account_id"
-    t.string   "query_str"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   add_foreign_key "authors", "books"
   add_foreign_key "books", "user_accounts"
   add_foreign_key "courses", "books"
   add_foreign_key "posts", "books", name: "book_id"
-  add_foreign_key "user_queries", "user_accounts"
+  add_foreign_key "searches", "user_accounts"
 end
