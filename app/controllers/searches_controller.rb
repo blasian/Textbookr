@@ -14,7 +14,7 @@ class SearchesController < ApplicationController
 			course: params[:q]["courses_department_cont"],
 			price_min: params[:q]["post_price_gteq"], 
 			price_max: params[:q]["post_price_lteq"], 
-			user_account_id: current_user_account.id,
+			user_account_id: current_user_account.nil? ? nil : current_user_account.id,
 			groupings: params[:groupings],
 			combinator: params[:combinator])
 		@query.save
