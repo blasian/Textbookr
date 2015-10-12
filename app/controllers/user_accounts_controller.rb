@@ -17,17 +17,6 @@ class UserAccountsController < ApplicationController
     @results = @search.result(:distinct => true)
   end
 
-  def create
-    @user = UserAccount.new(user_params)
-    if @user.save
-      UserMailer.account_activation(@user).deliver_now
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
-    else
-      render 'new'
-    end
-  end
-
   # GET /user_accounts/new
   def new
     @user_account = UserAccount.new
@@ -110,7 +99,8 @@ end
 
     respond_to do |format|
       if @user_account.save
-        flash[:success] = "Welcome to TextBookr!"
+        flash[:success] = "Welcome to TextBookr! Please check your email to activate your account."
+        UserMailer.account_activation(@user).deliver_now
         log_in @user_account
         format.html { redirect_to @user_account }
         format.json { render :show, status: :created, location: @user_account }
