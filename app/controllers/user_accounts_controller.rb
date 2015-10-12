@@ -100,7 +100,7 @@ end
     respond_to do |format|
       if @user_account.save
         flash[:success] = "Welcome to TextBookr! Please check your email to activate your account."
-        UserMailer.account_activation(@user).deliver_now
+        UserMailer.account_activation(@user_account).deliver_now
         log_in @user_account
         format.html { redirect_to @user_account }
         format.json { render :show, status: :created, location: @user_account }
