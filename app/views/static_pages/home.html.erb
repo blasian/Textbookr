@@ -2,11 +2,9 @@
 
 <div class="container text-center">
   <h1>TextBookr</h1>
-  <div class="row">
   	<%= search_form_for Book.ransack(params[:q]), url: query_searches_path, method: :post, :html => {:class => "input-group input-group-lg center-block"} do |f| %>
-  		<%= f.text_field :title_cont, :class => "home_input invisible_input", placeholder: "Enter a book title..", autocomplete: 'off'%>
-	  	<br>
+  		<%= f.text_field :title_cont, :class => "home_input invisible_input", placeholder: "Enter a book title..", autocomplete: 'off', :style => "width: 80%"%>
+  		<br>
 	  	<input type="submit"> </button>
 	<% end %>
-  </div>
 </div>

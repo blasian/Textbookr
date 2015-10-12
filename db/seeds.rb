@@ -50,7 +50,9 @@ UserAccount.create(
   email: "admin@email.com",
   isAdmin?: true,
   password: "password",
-  password_confirmation: "password"
+  password_confirmation: "password",
+  activated: true,
+  activated_at: Time.zone.now
 )
 
 # populating users
@@ -59,7 +61,9 @@ UserAccount.create(
     email: "#{Faker::Internet.free_email}",
     isAdmin?: false,
     password: "password",
-    password_confirmation: "password"
+    password_confirmation: "password",
+    activated: true,
+    activated_at: Time.zone.now
   )
 
   # populating books for user

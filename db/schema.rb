@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009000410) do
+ActiveRecord::Schema.define(version: 20151011234006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,9 @@ ActiveRecord::Schema.define(version: 20151009000410) do
     t.string   "password_digest"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string   "activation_digest"
+    t.boolean  "activated",              default: false
+    t.datetime "activated_at"
   end
 
   add_foreign_key "authors", "books"

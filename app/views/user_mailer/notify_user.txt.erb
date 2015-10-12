@@ -3,5 +3,6 @@ TextBookr
 A book matching the query: "<%= @query.attributes %>" has been posted.
 Follow this link to view the post. <%= book_path(@book) %>
 
-Thanks,
-TextBookr Team.
+TextBookr
+
+<%= link_to "Click here to stop receiving emails for this query.", alert_search_path(@query), method: :put %>

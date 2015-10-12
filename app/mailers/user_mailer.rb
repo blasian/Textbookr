@@ -7,8 +7,7 @@ class UserMailer < ApplicationMailer
 
   def password_reset(user)
   	@user = user
-
-    mail to: user.email, subject: "Password Reset"
+    mail(to: @user.email, subject: "Password Reset")
   end
 
   def notify_user(user, query, book)
@@ -17,5 +16,10 @@ class UserMailer < ApplicationMailer
   	@book = book
 
   	mail(to: @user.email, subject: 'Your book has been posted')
+  end
+
+  def account_activation(user)
+    @user = user
+    mail(to: @user.email, subject: 'Activate your account')
   end
 end

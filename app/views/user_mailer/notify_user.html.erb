@@ -1,10 +1,27 @@
 <h1>TextBookr</h1>
 
 <p>
-	A book has been posted that matches your query.
-	Follow this link to view the post.
-	<%= book_url(@book) %>
+	A book has been posted that matches your query: <br><br>
+	<% unless @query.title.empty? %>
+		Title: <%= @query.title %> <br>
+	<% end %>
+	<% unless @query.author.empty? %>
+		Author: <%= @query.author %> <br>
+	<% end %>
+	<% unless @query.course.empty? %>
+		Course: <%= @query.course %> <br>
+	<% end %>
+	<% unless @query.price_min.nil? %>
+		Price Min: <%= @query.price_min %>
+	<% end %>
+	<% unless @query.price_max.nil? %>
+		Price Max: <%= @query.price_max %> <br>
+	<% end %>
+	<br>
 
-	Thanks,
-	TextBookr Team.
+	<%= link_to "Follow this link to view the post.", book_url(@book) %> <br><br>
+
+	TextBookr<br>
+
+	<%= link_to "Click here to stop receiving emails for this query.", alert_search_path(@query), method: :put %>
 </p>

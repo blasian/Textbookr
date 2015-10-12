@@ -24,7 +24,7 @@
 		<div class="awk-container">
 			<p class="awkward-message"> Well, this is awkward... </p>
 			<p class="no-match awkward-message"> No posts matched your search </p>
-			<%= link_to "Click here to receive an email when a match is posted", search_path(@query, :search => { :alert => 1 }), :method => :put, class: "get-alert" %>
+			<%= link_to "Click here to receive an email when a match is posted", alert_search_path(@query), method: :put, class: "get-alert" %>
 		</div>
 	<% end %>
 
