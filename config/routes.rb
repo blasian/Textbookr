@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :password_resets, only: [:edit]
+  resources :password_resets, only: [:edit, :new]
   resources :account_activations, only: [:edit]
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -26,6 +26,7 @@ class UserAccountsController < ApplicationController
     else
       render 'new'
     end
+  end
 
   # GET /user_accounts/new
   def new
