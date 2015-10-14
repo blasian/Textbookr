@@ -1,4 +1,6 @@
 <p><%= @str %></p>
-<p><%= @user.email %></p>
-<p><%= @user.id %></p>
+<% unless @user.nil? %>
+	<p><%= @user.email %></p>
+	<p><%= @user.id %></p>
+<% end %>
 <p><%= Time.zone.now %></p>
