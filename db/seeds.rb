@@ -55,16 +55,6 @@ UserAccount.create(
   activated_at: Time.zone.now
 )
 
-# creating search query
-Search.create(
-  title: "Test Query",
-  author: "Test McTest",
-  price_max: 100,
-  department: "CPSC",
-  course_number: 101,
-  user_account_id: 20
-)
-
 # populating DB
 (NUM_USER).times do 
   user = UserAccount.create(
@@ -92,4 +82,14 @@ Search.create(
     )
     puts book
   end
+
+  # creating search query
+Search.create(
+  title: "Test Query",
+  author: "Test McTest",
+  price_max: 100,
+  department: "CPSC",
+  course_number: 101,
+  user_account_id: 1
+)
 end
