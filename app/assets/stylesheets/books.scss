@@ -162,7 +162,7 @@ div.field_with_errors {
 	float: left;
 }
 .content {
-	padding-left: 30px;
+	/*padding-left: 30px;*/
 }
 
 .book-authors {
@@ -176,11 +176,21 @@ div.field_with_errors {
 .book-title {
 	font-size: 80px;
 	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.dollar {
+	color: green;
+	font-size: 70px;
+	display: inline-block;
 }
 
 .book-ed-vol {
-	font-size: 10px;
+	font-size: 20px;
 	display: inline-block;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .contact {
@@ -188,8 +198,8 @@ div.field_with_errors {
 }
 
 .book-price {
-	font-size: 80px;
+	font-size: 90px;
 	display: inline-block;
-	margin-right: 30px;
 	color: green;
+	margin-bottom: 0px;
 }

@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="main-info">
-		<h1 class="book-price">$<%= @book.post.price %></h1>
+		<h1 class="book-price"><p class="dollar">$</p><%= @book.post.price %></h1><br>
 		<h1 class="book-title"> <%= @book.title %> </h1>
 		<h1 class="book-ed-vol">
 			<% unless @book.edition.blank? and @book.volume.blank? %>

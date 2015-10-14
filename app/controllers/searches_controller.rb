@@ -9,13 +9,13 @@ class SearchesController < ApplicationController
 
 	def alert
 		if current_user_account.nil?
-			flash[:danger] = "You must be logged in to receive alerts."
+			flash.now[:danger] = "You must be logged in to receive alerts."
 		else
-			flash[:success] = "You will receive an email when a book matches the current query."
+			flash.now[:success] = "You will receive an email when a book matches the current query."
 			new_alert = @query.alert ? false : true
 			@query.update_attributes alert: new_alert
 		end
-		render :action => 'index'
+		search
 	end
 
 	def search
@@ -40,7 +40,6 @@ class SearchesController < ApplicationController
 
 	def update
 		if @query.update_attributes(search_params)
-			# flash[:success] = "Success."
 			# UserMailer.initialize_tracking(user, self, book).deliver_now
 		end
 		render :action => 'index'

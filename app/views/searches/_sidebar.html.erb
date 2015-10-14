@@ -1,6 +1,6 @@
 <div id="sidebar">
 	<%= post.text_field :authors_au_fname_or_authors_au_lname_cont, :value => @query[:author], :placeholder => "Author", :class => "form-control invisible_input" %>
-	<%= post.text_field :courses_department_cont, :value => @query[:department], :placeholder => "Subject" , :class => "form-control invisible_input" %>
+	<%= post.text_field :courses_department_cont, :value => @query[:department], :placeholder => "Subject Code" , :class => "form-control invisible_input" %>
 	<%= post.text_field :courses_course_number_eq, :value => @query[:course_number], :placeholder => "Course #" , :class => "form-control invisible_input" %>
 	<%= post.text_field :post_price_gteq, :value => @query[:price_min], :placeholder => "Min $", :class => "form-control invisible_input" %>
 	<%= post.text_field :post_price_lteq, :value => @query[:price_max], :placeholder => "Max $", :class => "form-control invisible_input" %>

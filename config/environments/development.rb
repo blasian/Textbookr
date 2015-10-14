@@ -45,7 +45,7 @@ Rails.application.configure do
   # Raise error during email delivery
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :file
 
   ActionMailer::Base.smtp_settings = {
   :address              => "smtp.gmail.com",
@@ -53,7 +53,7 @@ Rails.application.configure do
   :domain               => "gmail.com",
   :user_name            => ENV["EMAIL_USERNAME_DEV"],
   :password             => ENV["EMAIL_PASSWORD_DEV"],
-  :authentication       => "plain",
+  :authentication       => "login",
   :enable_starttls_auto => true
 }
 end

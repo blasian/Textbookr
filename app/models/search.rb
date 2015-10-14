@@ -6,7 +6,8 @@ class Search < ActiveRecord::Base
 	def check_for_match book
 		query_params = {
 			"title" => self.title,
-			"course" => self.course,
+			"department" => self.department,
+			"course_number" => self.course_number,
 			"author" => self.author,
 			"price_min" => self.price_min,
 			"price_max" => self.price_max,

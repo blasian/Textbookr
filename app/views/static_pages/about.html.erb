@@ -2,13 +2,13 @@
 <div class="container">
 		<h1>Here to help.</h1>
 		<p class="lead">
-			The current method for UBC students to buy and sell textbooks is a total mess. Somehow an assortment of Facebook groups have become the main way for students to find each other. I was tired of the chaos that would ensue at the start of each term so I made this simple site that would make it more efficient for students to buy and sell their books.
+			The current method for UBC students to buy and sell textbooks is a total mess. Somehow a random assortment of Facebook groups have become the best way for students to find each other. I was tired of the chaos that would ensue each term so I made this simple website that makes it more efficient for students to connect with each other.
 		</p>
 		<h2>Want a new feature? Found a bug? Let me know!</h2>
 		<p>Please be as specific as possible.</p>
-		<%= form_tag(suggest_path, method: :post) do %>
+		<%= form_tag(suggest_path, method: :put) do %>
 			<%= text_area_tag 'bug-box', nil, rows: 6 %>
 			<br>
-			<%= submit_tag %>
+			<%= submit_tag "Send" %>
 		<% end %>
 </div>
