@@ -55,7 +55,17 @@ UserAccount.create(
   activated_at: Time.zone.now
 )
 
-# populating users
+# creating search query
+Search.create(
+  title: "Test Query",
+  author: "Test McTest",
+  price_max: 100,
+  department: "CPSC",
+  course_number: 101,
+  user_account_id: 20
+)
+
+# populating DB
 (NUM_USER).times do 
   user = UserAccount.create(
     email: "#{Faker::Internet.free_email}",
@@ -65,7 +75,7 @@ UserAccount.create(
     activated: true,
     activated_at: Time.zone.now
   )
-
+  puts user
   # populating books for user
   rand(1..10).times do
     book = Book.create!(
@@ -80,5 +90,6 @@ UserAccount.create(
       authors: rand_authors,
       courses: rand_courses
     )
+    puts book
   end
 end

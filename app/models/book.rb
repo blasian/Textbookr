@@ -11,6 +11,10 @@ class Book < ActiveRecord::Base
 	validate :has_author?, :has_too_many_course?, :has_too_many_author?
 	after_save :alert_observers
 
+	ransacker :title_case_insensitive, type: :string do
+		Arel.sql('lower(books.title)')
+	end
+
 	def reject_author? a
 		return false if authors.length == 0
 		return (a[:au_lname].blank? and a[:au_fname].blank?)

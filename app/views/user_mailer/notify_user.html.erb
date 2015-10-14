@@ -2,26 +2,54 @@
 
 <p>
 	A book has been posted that matches your query: <br><br>
+	Title: 
 	<% unless @query.title.empty? %>
-		Title: <%= @query.title %> <br>
+		<%= @query.title %>
+	<% else %>
+		Any
 	<% end %>
+	<br>
+	Author:
 	<% unless @query.author.empty? %>
-		Author: <%= @query.author %> <br>
+		<%= @query.author %>
+	<% else %>
+		Any
 	<% end %>
-	<% unless @query.course.empty? %>
-		Course: <%= @query.course %> <br>
+	<br>
+	Department: 
+	<% unless @query.department.empty? %>
+		<%= @query.department %>
+	<% else %>
+		Any
 	<% end %>
+	<br>
+	Course #: 
+	<% unless @query.course_number.nil? %>
+		<%= @query.course_number %>
+	<% else %>
+		Any
+	<% end %>
+	<br>
+	Price Min: 
 	<% unless @query.price_min.nil? %>
-		Price Min: <%= @query.price_min %>
+		<%= @query.price_min %>
+	<% else %>
+		Any
 	<% end %>
+	<br>
+	Price Max: 
 	<% unless @query.price_max.nil? %>
-		Price Max: <%= @query.price_max %> <br>
+		<%= @query.price_max %>
+	<% else %>
+		Any
 	<% end %>
+
+	<br>
 	<br>
 
 	<%= link_to "Follow this link to view the post.", book_url(@book) %> <br><br>
 
 	TextBookr<br>
 
-	<%= link_to "Click here to stop receiving emails for this query.", alert_search_path(@query), method: :put %>
+	<%= link_to "Click here to stop receiving alerts for this query.", alert_search_path(@query), method: :put %>
 </p>

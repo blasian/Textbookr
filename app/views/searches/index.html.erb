@@ -8,9 +8,10 @@
 	<%= content_tag :p, display_query_sql(@results) if false %>
 	<% unless @results.empty? %>
 		<div id="results-container">
+			<%= @results.to_sql if false%>
 			<table id="results" class='table table-hover'>
 				<thead>
-					<%= content_tag(:th, sort_link(@search, :title), class: 'col-sm-8') %>
+					<%= content_tag(:th, sort_link(@search, :title_case_insensitive, 'Title'), class: 'col-sm-8') %>
 					<%= content_tag(:th, sort_link(@search, :post_price), class: 'col-sm-2') %>
 					<%= content_tag(:th, sort_link(@search, :created_at, "Posted"), class: 'col-sm-2') %>
 				</thead>

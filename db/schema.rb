@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011234006) do
+ActiveRecord::Schema.define(version: 20151013211647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,13 +56,14 @@ ActiveRecord::Schema.define(version: 20151011234006) do
     t.float    "price_min"
     t.float    "price_max"
     t.string   "author"
-    t.string   "course"
+    t.string   "department"
     t.integer  "user_account_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.boolean  "alert"
     t.text     "groupings"
     t.string   "combinator"
+    t.integer  "course_number"
   end
 
   create_table "user_accounts", force: :cascade do |t|

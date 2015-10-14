@@ -22,4 +22,10 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Activate your account')
   end
+
+  def suggestion(str, user)
+    @user = user
+    @str = str
+    mail(to: "mikespearman.e@gmail.com", subject: 'Suggestion Received')
+  end
 end

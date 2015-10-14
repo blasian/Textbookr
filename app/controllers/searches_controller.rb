@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-	before_action :set_search
+	before_action :set_results, only: [:index, :search, :alert]
 	before_action :set_query, only: [:alert, :update]
 	PAGESIZE = 15
 
@@ -8,9 +8,14 @@ class SearchesController < ApplicationController
 	end
 
 	def alert
-		new_alert = @query.alert ? false : true
-		@query.update_attributes alert: new_alert
-		render action: 'index'
+		if current_user_account.nil?
+			flash[:danger] = "You must be logged in to receive alerts."
+		else
+			flash[:success] = "You will receive an email when a book matches the current query."
+			new_alert = @query.alert ? false : true
+			@query.update_attributes alert: new_alert
+		end
+		render :action => 'index'
 	end
 
 	def search
@@ -23,7 +28,8 @@ class SearchesController < ApplicationController
 		@query = Search.create(
 			title: params[:q]["title_cont"], 
 			author: params[:q]["authors_au_fname_or_authors_au_lname_cont"], 
-			course: params[:q]["courses_department_cont"],
+			department: params[:q]["courses_department_cont"],
+			course_number: params[:q]["courses_course_number_eq"],
 			price_min: params[:q]["post_price_gteq"], 
 			price_max: params[:q]["post_price_lteq"], 
 			user_account_id: current_user_account.nil? ? nil : current_user_account.id,
@@ -46,7 +52,7 @@ class SearchesController < ApplicationController
 		@query = Search.find(params[:id])
 	end
 
-	def set_search
+	def set_results
 		if params[:q].nil?
 			@search = Book.ransack(params[:q])
 			@search.sorts = 'created_at desc'
@@ -68,7 +74,7 @@ class SearchesController < ApplicationController
 				@search.sorts = params[:q][:s]
 			end
 		end
-		@results = @search.result(:distinct=>true).includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
+		@results = @search.result.includes(:post, :authors, :courses).page(params[:page]).per(PAGESIZE)
 	end
 
 	def search_params

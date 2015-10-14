@@ -17,6 +17,11 @@ $(function() {
 	    	$('form').append("<input type='text' name='page' value='" + nextPage + "' hidden='true'/>");
 	    $('form').submit();
 	});
+
+	if (($(document).find('div .alert').length != 0) && ($(document).find('#search-bar, #sidebar').length != 0)) {
+		$('div .alert').css({"position":"fixed","left":"0px","top":"50px","width":"100%","z-index":"1000"});
+		$('#search-bar, #sidebar, #content-container').css({"top": "100px"});
+	}
 });
 
 $.urlParam = function(name, url){
