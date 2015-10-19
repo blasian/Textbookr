@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Host for email delivery
-  config.action_mailer.default_url_options = { host: 'localhost:3000'}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Raise error during email delivery
   config.action_mailer.raise_delivery_errors = true

@@ -33,15 +33,14 @@ body {
 	top: 50px;
 }
 
+.hover_cell:hover {
+	cursor: pointer;
+}
 
 /* Table Rows */
 
 .table th, .table td { 
 	border-top: none !important; 
-}
-
-.result:hover, .posted_book:hover {
-	cursor: pointer;
 }
 
 .table > thead > tr > th,

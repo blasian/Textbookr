@@ -3,6 +3,7 @@ class Course < ActiveRecord::Base
 	validates :course_number, :department, presence: true
 	validate :department_format
 	validate :course_number_format
+	before_save { |course| course.department = course.department.upcase }
 
 	def department_format
 		unless (department.nil?)

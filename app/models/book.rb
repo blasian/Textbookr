@@ -63,7 +63,7 @@ class Book < ActiveRecord::Base
 	end
 
 	def alert_observers
-		Search.where(alert: true).find_each do |query|
+		Search.where(alert: true).where.not(user_account_id: nil).find_each do |query|
 			query.check_for_match self
 		end
 	end

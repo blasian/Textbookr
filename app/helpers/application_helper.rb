@@ -6,4 +6,15 @@ module ApplicationHelper
 		end
 	    link_to(name, "#", "data-association" => "#{association}" , "data-content" => "#{fields}", :class => "hidden_fields_link", hidden: true )
 	end
+
+	BOOTSTRAP_FLASH_MSG = {
+		success: 'alert-success',
+		error: 'alert-error',
+		alert: 'alert-block',
+		notice: 'alert-info'
+	}
+
+	def bootstrap_class_for(flash_type)
+		BOOTSTRAP_FLASH_MSG.fetch(flash_type, flash_type.to_s)
+	end
 end

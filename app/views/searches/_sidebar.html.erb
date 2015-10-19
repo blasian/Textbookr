@@ -10,7 +10,7 @@
 	<div class="alert-container col-md-12 col-sm-12">
 		<% if @query.id %>
 			<p> Can't find your book?</p>
-			<%= link_to "Receive an email when a match is posted", alert_search_path(@query), method: :put %>
+			<%= link_to "Receive an email when your query finds a match.", alert_search_path(@query), method: :put %>
 		<% end %>
 	</div>
 </div>

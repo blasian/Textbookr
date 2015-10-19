@@ -1,41 +1,37 @@
 class SearchesController < ApplicationController
-	before_action :set_results, only: [:index, :search, :alert]
-	before_action :set_query, only: [:alert, :update]
+	before_action :set_query
+	before_action :set_results, only: [:index, :create, :alert]
 	PAGESIZE = 15
 
 	def index
-		@query = @query || Search.new
 	end
 
 	def alert
 		if current_user_account.nil?
 			flash.now[:danger] = "You must be logged in to receive alerts."
 		else
-			flash.now[:success] = "You will receive an email when a book matches the current query."
-			new_alert = @query.alert ? false : true
-			@query.update_attributes alert: new_alert
+			flash.now[:success] = "You will receive an email when a book matches the current query. View your currently saved queries on your account page."
+			new_status = @query.alert ? false : true
+			@query.update_attribute :alert, new_status
 		end
-		search
-	end
-
-	def search
-		@query = @query || Search.new
-		create unless params[:q].nil?
 		render :action => 'index'
 	end
 
 	def create
-		@query = Search.create(
-			title: params[:q]["title_cont"], 
-			author: params[:q]["authors_au_fname_or_authors_au_lname_cont"], 
-			department: params[:q]["courses_department_cont"],
-			course_number: params[:q]["courses_course_number_eq"],
-			price_min: params[:q]["post_price_gteq"], 
-			price_max: params[:q]["post_price_lteq"], 
-			user_account_id: current_user_account.nil? ? nil : current_user_account.id,
-			groupings: params[:groupings],
-			combinator: params[:combinator]
-		)
+		unless params[:q].nil?
+			@query = Search.create(
+				title: params[:q]["title_cont"], 
+				author: params[:q]["authors_au_fname_or_authors_au_lname_cont"], 
+				department: params[:q]["courses_department_cont"],
+				course_number: params[:q]["courses_course_number_eq"],
+				price_min: params[:q]["post_price_gteq"], 
+				price_max: params[:q]["post_price_lteq"], 
+				user_account_id: current_user_account.nil? ? nil : current_user_account.id,
+				groupings: params[:groupings],
+				combinator: params[:combinator]
+			)
+		end
+		render :action => 'index'
 	end
 
 	def update
@@ -45,10 +41,21 @@ class SearchesController < ApplicationController
 		render :action => 'index'
 	end
 
+	def destroy
+		@query = Search.find(params[:id])
+		@query.destroy
+		flash[:success] = 'You will no longer receive alerts for this query.'
+		redirect_to user_account_url(current_user_account)
+	end
+
 	private
 
 	def set_query 
-		@query = Search.find(params[:id])
+		if params[:id].nil?
+			@query = Search.new
+		else
+			@query = Search.find(params[:id])
+		end
 	end
 
 	def set_results

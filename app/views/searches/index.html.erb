@@ -1,5 +1,5 @@
 <div class="container">
-	<%= search_form_for @search, url: query_searches_path, method: :post, :html => {:class => "input-group input-group-lg"} do |f| %>
+	<%= search_form_for @search, url: searches_path, method: :post, :html => {:class => "input-group input-group-lg"} do |f| %>
 		<%= render 'sidebar', :post => f %>
 		<%= render 'search_bar', :post => f %>
 	<% end %>

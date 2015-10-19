@@ -1,4 +1,5 @@
 class UserAccountsController < ApplicationController
+  before_filter :authenticate_user_account!
   before_action :set_user_account, only: [:show, :edit, :update, :destroy]
   before_action :admin_user, only: [:admin_view]
 
@@ -11,10 +12,12 @@ class UserAccountsController < ApplicationController
   # GET /user_accounts/1
   # GET /user_accounts/1.json
   def show
-    @current_user_books = current_user_account.books
-    @search = @current_user_books.ransack(params[:q])
-    @search.sorts = 'created_at desc'
-    @results = @search.result(:distinct => true)
+    @book_search = current_user_account.books.ransack
+    @query_search = current_user_account.searches.ransack(alert_true: '1')
+    @query_search.sorts = 'created_at desc'
+    @book_search.sorts = 'created_at desc'
+    @book_results = @book_search.result
+    @query_results = @query_search.result
   end
 
   # GET /user_accounts/new
@@ -28,9 +31,7 @@ class UserAccountsController < ApplicationController
 
   def add_query
     @query = current_user_account.user_queries.build
-    @query.query_str = params[:query]
     @query.save
-    flash[:success] = "You will be emailed when a post matches query: #{@query.query_str}"
     redirect_to search_path
   end
 
@@ -80,7 +81,6 @@ class UserAccountsController < ApplicationController
                                           )"
     @most_active_user = ActiveRecord::Base.connection.execute(sql)
 
-  
   # All users who have posted at least one book
   sql = "SELECT   ua.id, ua.email, COUNT(*)
          FROM     user_accounts ua, posts p, books b
@@ -131,7 +131,7 @@ end
   def destroy
     @user_account = UserAccount.find(params[:id])
     @user_account.destroy
-    flash[:info] = 'Account was destroyed :('
+    flash[:danger] = 'Account was destroyed :('
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :no_content }

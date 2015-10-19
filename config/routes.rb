@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :user_accounts
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
 
-  get 'user_accounts/index'
-  get 'user_accounts/new'
-  get 'user_accounts/edit'
   get 'user_accounts/show'
   get 'add_query' => 'user_accounts#add_query'
 
@@ -15,11 +13,6 @@ Rails.application.routes.draw do
   get 'books/new'
   get 'books/show'
 
-  get 'signup' => 'user_accounts#new'  
-  get 'not_logged_in' => "posts#not_logged_in"
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
   put 'suggest' => 'static_pages#suggest'
   
   resources :static_pages
@@ -32,13 +25,7 @@ Rails.application.routes.draw do
     member do
       put 'alert'
     end
-    collection do
-      match 'query' => 'searches#search', via: [:post, :get], as: :query
-    end
   end
-
-  resources :password_resets
-  resources :account_activations, only: [:edit]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

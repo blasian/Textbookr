@@ -1,25 +1,24 @@
 <div class="container">
   <h1>History</h1>
   <h3 style="display:inline-block"><%= current_user_account.email %></h3>
-  <%= link_to '[edit]', edit_user_account_path %>
+  <%= link_to '[edit]', edit_user_account_registration_path %>
   <table id="posted_books" class="table">
     <thead>
       <tr>
-        <th>Book</th>
-        <%= content_tag(:th, sort_link(@search, :created_at, "Date")) %>
-        <th>Status</th>
-        <th colspan="4"></th>
+        <th class="col-sm-6">Books</th>
+        <th class="col-sm-3">Date</th>
+        <th class="col-sm-3" colspan="4">Status</th>
       </tr>
     </thead>  
 
     <tbody>
-      <% if current_user_account.books.empty? %>
+      <% if @book_results.empty? %>
         <tr> <td> No books posted </td> </tr>
       <% else %>
-        <% @results.each do |book| %>
+        <% @book_results.each do |book| %>
           <tr class="<%= book.active ? '' : 'danger' %> posted_book">
             <td class="book_cell hover_cell"><a href="#" data-link="<%=book_path(book)%>"><%=book.title%></a></td>
-            <td class="date_cell hover_cell"> <%= Time.at(book.created_at).to_formatted_s(:long) %> </td>
+            <td class="book_date_cell hover_cell"> <%= Time.at(book.created_at).to_formatted_s(:long) %> </td>
             <td class="hover_cell active_cell">
               <% if book.active %>
                 Posted
@@ -38,5 +37,70 @@
       <% end %>
     </tbody>
   </table>
-    <%= link_to 'Delete my account', current_user_account, style: "color: white;", class: "btn btn-danger btn-delete", method: :delete, data: { confirm: 'Are you sure?' }  %> 
+
+  <table id="saved_queries" class="table">
+    <thead>
+      <tr>
+        <th class="col-sm-6">Saved Queries</th>
+        <th class="col-sm-3">Date</th>
+        <th class="col-sm-3" colspan="4">Remove</th>
+      </tr>
+    </thead>  
+
+    <tbody>
+      <% if @query_results.empty? %>
+        <tr> <td> No queries saved </td> </tr>
+      <% else %>
+        <% @query_results.each do |query| %>
+          <tr class="saved_query">
+            <td class="query_cell">
+              Title: 
+              <% unless query.title.empty? %>
+                <%= query.title %>
+              <% else %>
+                Any
+              <% end %>
+              <br>
+              Author:
+              <% unless query.author.empty? %>
+                <%= query.author %>
+              <% else %>
+                Any
+              <% end %>
+              <br>
+              Course: 
+              <% unless query.department.empty? %>
+                <%= query.department %>
+              <% else %>
+                Any
+              <% end %>
+              <% unless query.course_number.nil? %>
+                <%= query.course_number %>
+              <% else %>
+                Any
+              <% end %>
+              <br>
+              Price: 
+              <% unless query.price_min.nil? %>
+                <%= query.price_min %>
+              <% else %>
+                Any
+              <% end %>
+              -
+              <% unless query.price_max.nil? %>
+                <%= query.price_max %>
+              <% else %>
+                Any
+              <% end %>
+            </td>
+            <td class="query_date_cell"> <%= Time.at(query.created_at).to_formatted_s(:long) %> </td>
+            <td class="hover_cell destroy_cell">
+              <%= link_to 'Destroy', query, id: current_user_account.id, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>

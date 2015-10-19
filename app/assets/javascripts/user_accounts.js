@@ -1,27 +1,28 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-$(document).on('mouseover', '#posted_books td', function(e) {
+$(document).on('mouseover', '#posted_books td, #saved_queries td', function(e) {
 	$(this).addClass('selected_cell');
 	// Changing book + date cell together
 	if ($(this).hasClass('book_cell')) {
 		$(this).next().addClass('selected_cell');
 	}
-	if ($(this).hasClass('date_cell')) {
+	if ($(this).hasClass('book_date_cell')) {
 		$(this).prev().addClass('selected_cell');
 	}
-}).on('mouseout', '#posted_books td', function(e) {
+}).on('mouseout', '#posted_books td, #saved_queries td', function(e) {
 	$(this).removeClass('selected_cell')
 	// Changing book + date cell together
 	if ($(this).hasClass('book_cell')) {
 		$(this).next().removeClass('selected_cell');
 	}
-	if ($(this).hasClass('date_cell')) {
+	if ($(this).hasClass('book_date_cell')) {
 		$(this).prev().removeClass('selected_cell');
 	}
 }).on('click', 'td', function(e) {
+	e.preventDefault();
 	var link;
-	if (($(this).hasClass('book_cell')) || ($(this).hasClass('date_cell')))
+	if (($(this).hasClass('book_cell')) || ($(this).hasClass('book_date_cell')))
 		window.location.href = $(this).closest('tr').find('.book_cell a').attr('data-link');
 	else if ($(this).hasClass('destroy_cell'))
 		$(this).find('a').click();

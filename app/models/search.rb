@@ -1,6 +1,7 @@
 class Search < ActiveRecord::Base
 	has_many :books
 	belongs_to :user_account
+	
 	serialize :groupings
 
 	def check_for_match book
@@ -23,7 +24,6 @@ class Search < ActiveRecord::Base
 		end
 		logger.debug "Looking for : #{book.id}"
 		if results.include? book
-	        # alert user
 	        logger.debug "MATCH FOUND:    \n #{book.title}"
 	        user = UserAccount.find(self.user_account_id)
 	        UserMailer.notify_user(user, self, book).deliver_now

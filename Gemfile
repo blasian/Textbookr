@@ -20,6 +20,7 @@ gem 'kaminari'
 gem "factory_girl_rails",   "~> 4.0"
 gem "capybara"
 gem 'pg',          '0.17.1'
+gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

@@ -11,6 +11,7 @@ Author.destroy_all
 Book.destroy_all
 Course.destroy_all
 Post.destroy_all
+Search.destroy_all
 
 NUM_USER = 20
 
@@ -50,9 +51,16 @@ UserAccount.create(
   email: "admin@email.com",
   isAdmin?: true,
   password: "password",
-  password_confirmation: "password",
-  activated: true,
-  activated_at: Time.zone.now
+)
+
+# creating search query
+Search.create(
+  title: "Test Query",
+  author: "Test McTest",
+  price_max: 100,
+  department: "CPSC",
+  course_number: 101,
+  user_account_id: 1
 )
 
 # populating DB
@@ -61,11 +69,8 @@ UserAccount.create(
     email: "#{Faker::Internet.free_email}",
     isAdmin?: false,
     password: "password",
-    password_confirmation: "password",
-    activated: true,
-    activated_at: Time.zone.now
   )
-  puts user
+  puts user.inspect
   # populating books for user
   rand(1..10).times do
     book = Book.create!(
@@ -80,16 +85,6 @@ UserAccount.create(
       authors: rand_authors,
       courses: rand_courses
     )
-    puts book
+    puts book.inspect
   end
-
-  # creating search query
-Search.create(
-  title: "Test Query",
-  author: "Test McTest",
-  price_max: 100,
-  department: "CPSC",
-  course_number: 101,
-  user_account_id: 1
-)
 end
