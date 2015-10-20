@@ -8,9 +8,7 @@
 		<i class="fa fa-search"></i>
 	</button>
 	<div class="alert-container col-md-12 col-sm-12">
-		<% if @query.id %>
-			<p> Can't find your book?</p>
-			<%= link_to "Receive an email when your query finds a match.", alert_search_path(@query), method: :put %>
-		<% end %>
+		<p> Can't find your book?</p>
+		<%= link_to "Receive an email when your query finds a match.", searches_path(@query), method: :post %>
 	</div>
 </div>

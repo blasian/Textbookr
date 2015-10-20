@@ -1,10 +1,11 @@
 <div class="container">
-	<%= search_form_for @search, url: searches_path, method: :post, :html => {:class => "input-group input-group-lg"} do |f| %>
+	<%= search_form_for @search, url: searches_path, :html => {:class => "input-group input-group-lg"} do |f| %>
 		<%= render 'sidebar', :post => f %>
 		<%= render 'search_bar', :post => f %>
 	<% end %>
 </div>
 <div id="content-container" class="col-md-12">
+	<%= debug @search %>
 	<%= content_tag :p, display_query_sql(@results) if false %>
 	<% unless @results.empty? %>
 		<div id="results-container">
@@ -25,7 +26,7 @@
 		<div class="awk-container">
 			<p class="awkward-message"> Well, this is awkward... </p>
 			<p class="no-match awkward-message"> No posts matched your search </p>
-			<%= link_to "Click here to receive an email when a match is posted", alert_search_path(@query), method: :put, class: "get-alert" %>
+			<%= link_to "Click here to receive an email when a match is posted", searches_path(@query), method: :post, class: "get-alert" %>
 		</div>
 	<% end %>
 

@@ -12,7 +12,7 @@ class UserAccountsController < ApplicationController
   # GET /user_accounts/1
   # GET /user_accounts/1.json
   def show
-    @book_search = current_user_account.books.ransack
+    @book_search  = current_user_account.books.ransack
     @query_search = current_user_account.searches.ransack(alert_true: '1')
     @query_search.sorts = 'created_at desc'
     @book_search.sorts = 'created_at desc'
@@ -27,12 +27,6 @@ class UserAccountsController < ApplicationController
 
   # GET /user_accounts/1/edit
   def edit
-  end
-
-  def add_query
-    @query = current_user_account.user_queries.build
-    @query.save
-    redirect_to search_path
   end
 
   def admin_view

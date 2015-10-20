@@ -10,7 +10,7 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="navbar-brand" style="padding: 0px"> <%= link_to "TextBookr", root_path %></li>
-        <li ><%= link_to "Search", searches_path, method: "post" %></li>             
+        <li ><%= link_to "Search", searches_path %></li>             
         <li>
           <% if user_account_signed_in? %>
             <%= link_to "Post", new_book_path %>

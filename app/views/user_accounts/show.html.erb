@@ -55,21 +55,21 @@
           <tr class="saved_query">
             <td class="query_cell">
               Title: 
-              <% unless query.title.empty? %>
+              <% unless query.title.nil? %>
                 <%= query.title %>
               <% else %>
                 Any
               <% end %>
               <br>
               Author:
-              <% unless query.author.empty? %>
+              <% unless query.author.nil? %>
                 <%= query.author %>
               <% else %>
                 Any
               <% end %>
               <br>
               Course: 
-              <% unless query.department.empty? %>
+              <% unless query.department.nil? %>
                 <%= query.department %>
               <% else %>
                 Any
