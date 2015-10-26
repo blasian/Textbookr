@@ -32,17 +32,28 @@ class SearchesController < ApplicationController
 				price_min: params[:q][:post_price_gteq],
 				price_max: params[:q][:post_price_lteq],
 				user_account_id: current_user_account.nil? ? nil : current_user_account.id,
-				alert: true
 			}
+		else
+			@query = {}
 		end
 	end
 
 	def set_results
-		if params.nil?
+		if params['q'].nil?
 			@search = Book.ransack
 			@search.sorts = 'created_at desc'
 		else
-			@search = Book.joins(:authors, :courses).ransack(params[:q])
+			params[:combinator] = 'or'
+			params[:groupings] = []
+			params[:q].each_pair do |key, value|
+				if key == 'title_cont'
+					params[:groupings] << {key=>value}
+				elsif key == 's'
+				elsif
+					value.split(' ').each_with_index { |word, index| params[:groupings][index] = {key=>word} }
+				end
+			end
+			@search = Book.joins(:authors, :courses).ransack(params)
 			if params[:q].nil?
 				@search.sorts = 'created_at desc'
 			else

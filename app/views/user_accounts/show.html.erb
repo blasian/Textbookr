@@ -7,7 +7,7 @@
       <tr>
         <th class="col-sm-6">Books</th>
         <th class="col-sm-3">Date</th>
-        <th class="col-sm-3" colspan="4">Status</th>
+        <th class="col-sm-3" colspan="4"></th>
       </tr>
     </thead>  
 
@@ -16,16 +16,8 @@
         <tr> <td> No books posted </td> </tr>
       <% else %>
         <% @book_results.each do |book| %>
-          <tr class="<%= book.active ? '' : 'danger' %> posted_book">
             <td class="book_cell hover_cell"><a href="#" data-link="<%=book_path(book)%>"><%=book.title%></a></td>
             <td class="book_date_cell hover_cell"> <%= Time.at(book.created_at).to_formatted_s(:long) %> </td>
-            <td class="hover_cell active_cell">
-              <% if book.active %>
-                Posted
-              <% else %>
-                <%= link_to 'Repost?', repost_path(id: book.id) %>
-              <% end %>
-            </td>
             <td class="hover_cell edit_cell">
               <%= link_to 'Edit', edit_book_path(book) %>
             </td>
@@ -37,70 +29,4 @@
       <% end %>
     </tbody>
   </table>
-
-  <table id="saved_queries" class="table">
-    <thead>
-      <tr>
-        <th class="col-sm-6">Saved Queries</th>
-        <th class="col-sm-3">Date</th>
-        <th class="col-sm-3" colspan="4">Remove</th>
-      </tr>
-    </thead>  
-
-    <tbody>
-      <% if @query_results.empty? %>
-        <tr> <td> No queries saved </td> </tr>
-      <% else %>
-        <% @query_results.each do |query| %>
-          <tr class="saved_query">
-            <td class="query_cell">
-              Title: 
-              <% unless query.title.nil? %>
-                <%= query.title %>
-              <% else %>
-                Any
-              <% end %>
-              <br>
-              Author:
-              <% unless query.author.nil? %>
-                <%= query.author %>
-              <% else %>
-                Any
-              <% end %>
-              <br>
-              Course: 
-              <% unless query.department.nil? %>
-                <%= query.department %>
-              <% else %>
-                Any
-              <% end %>
-              <% unless query.course_number.nil? %>
-                <%= query.course_number %>
-              <% else %>
-                Any
-              <% end %>
-              <br>
-              Price: 
-              <% unless query.price_min.nil? %>
-                <%= query.price_min %>
-              <% else %>
-                Any
-              <% end %>
-              -
-              <% unless query.price_max.nil? %>
-                <%= query.price_max %>
-              <% else %>
-                Any
-              <% end %>
-            </td>
-            <td class="query_date_cell"> <%= Time.at(query.created_at).to_formatted_s(:long) %> </td>
-            <td class="hover_cell destroy_cell">
-              <%= link_to 'Destroy', query, id: current_user_account.id, method: :delete, data: { confirm: 'Are you sure?' } %>
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-
 </div>

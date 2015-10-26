@@ -13,11 +13,8 @@ class UserAccountsController < ApplicationController
   # GET /user_accounts/1.json
   def show
     @book_search  = current_user_account.books.ransack
-    @query_search = current_user_account.searches.ransack(alert_true: '1')
-    @query_search.sorts = 'created_at desc'
     @book_search.sorts = 'created_at desc'
     @book_results = @book_search.result
-    @query_results = @query_search.result
   end
 
   # GET /user_accounts/new

@@ -9,7 +9,7 @@ class Book < ActiveRecord::Base
 	accepts_nested_attributes_for :courses, :allow_destroy => true, :reject_if => :reject_course?
 	validates :user_account, :title, presence: true
 	validate :has_author?, :has_too_many_course?, :has_too_many_author?
-	after_save :alert_observers
+	# after_save :alert_observers
 
 	ransacker :title_case_insensitive, type: :string do
 		Arel.sql('lower(books.title)')
